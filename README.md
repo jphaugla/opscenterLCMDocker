@@ -7,7 +7,8 @@ http://downloads.datastax.com/extra/docker_examples/latest/
 
 If you want to set up a opscenter and datastax without the need for LCM, the docker_examples is the much better way to go instead of continuing here.
 
-this is at https://github.com/jphaugla/opscenterLCMDocker
+this 
+http://downloads.datastax.com/extra/docker_examples/latest/
 
 
 To run through the demo:
