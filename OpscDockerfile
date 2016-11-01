@@ -1,0 +1,38 @@
+# build the image and run it as
+#
+# docker run -d opscenter
+#
+# then open in the browser http://OPSCENTER_CONTAINER_IP_ADDRESS:8888
+
+FROM nimmis/java:oracle-8-jdk
+
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get -y install adduser \
+    curl \
+    lsb-base \
+    procps \
+    ssh \
+    openssh-server \
+    openssh-client \
+    zlib1g \
+    gzip \
+    python \
+    python-support \
+    ntp bash tree && \
+    rm -rf /var/lib/apt/lists/*
+
+# OpsCenter tarball can be download into the folder where Dockerfile is
+# wget --user=$USER --password=$PASS http://downloads.datastax.com/enterprise/opscenter-6.0.0.tar.gz
+# you may want to replace opscenter-6.0.0.tar.gz with the corresponding downloaded package name. When
+# downloaded, please remove the version number part of the filename (or create a symlink), so the
+# resulting file is named opscenter.tar.gz (that way the docker file itself remains version independent).
+ADD opscenter.tar.gz /opt
+
+RUN ln -s /opt/ops* /opt/opscenter
+
+# Agent and web ui
+EXPOSE 8888 50031 61620
+
+ENTRYPOINT ["/opt/opscenter/bin/opscenter"]
+CMD ["-f"]

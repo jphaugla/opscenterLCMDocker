@@ -1,0 +1,55 @@
+# Provided without any warranty, these files are intended
+# to accompany the whitepaper about DSE on Docker and are
+# not intended for production and are not actively maintained.
+
+# Loosely based on docker-cassandra by the fine folk at Spotify
+# -- https://github.com/spotify/docker-cassandra/
+# Loosely based on cassandra-docker by the one and only Al Tobey
+# -- https://github.com/tobert/cassandra-docker/
+
+# base yourself on any ubuntu 14.04 image containing JDK8
+# official Docker Java images are distributed with OpenJDK
+# Datastax certifies its product releases specifically
+# on the Oracle/Sun JVM, so YMMV with OpenJDK
+
+FROM nimmis/java:oracle-8-jdk
+
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get -y install adduser \
+    curl \
+    lsb-base \
+    procps \
+    zlib1g \
+    gzip \
+    python \
+    python-support \
+    sysstat \
+    ssh  \
+    openssh-server \
+    openssh-client \
+    ntp bash tree && \
+    rm -rf /var/lib/apt/lists/*
+
+# grab gosu for easy step-down from root
+RUN curl -o /bin/gosu -SkL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture)" \
+    && chmod +x /bin/gosu
+
+COPY sshd_config /etc/ssh/
+
+# Cassandra
+EXPOSE 7000 9042 9160
+
+# Solr
+EXPOSE 8983 8984
+
+# Spark
+EXPOSE 4040 7080 7081 7077
+
+# Hadoop
+EXPOSE 8012 50030 50060 9290
+
+# Hive/Shark
+EXPOSE 10000
+
+# Graph
