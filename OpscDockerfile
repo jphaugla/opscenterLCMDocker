@@ -14,6 +14,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     procps \
     ssh \
     openssh-server \
+    software-properties-common \
+    apt-transport-https \
     openssh-client \
     zlib1g \
     gzip \
@@ -22,17 +24,13 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     ntp bash tree && \
     rm -rf /var/lib/apt/lists/*
 
-# OpsCenter tarball can be download into the folder where Dockerfile is
-# wget --user=$USER --password=$PASS http://downloads.datastax.com/enterprise/opscenter-6.0.0.tar.gz
-# you may want to replace opscenter-6.0.0.tar.gz with the corresponding downloaded package name. When
-# downloaded, please remove the version number part of the filename (or create a symlink), so the
-# resulting file is named opscenter.tar.gz (that way the docker file itself remains version independent).
-ADD opscenter.tar.gz /opt
-
-RUN ln -s /opt/ops* /opt/opscenter
+#  add repository for datastax
+ADD datastax.sources.list /etc/apt/sources.list.d
+# import package-signing key
+RUN curl -L https://debian.datastax.com/debian/repo_key | apt-key add - 
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get -y install opscenter 
 
 # Agent and web ui
 EXPOSE 8888 50031 61620
-
-ENTRYPOINT ["/opt/opscenter/bin/opscenter"]
-CMD ["-f"]

@@ -1,4 +1,4 @@
-  echo "Run base node "
+echo "Run base node "
 export PASS=datastax
 export OPSC_IMAGE=readydse
 docker run -d --name node1 $OPSC_IMAGE

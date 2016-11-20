@@ -1,1 +1,1 @@
-docker build . -t opscenter603.tar.gz -f OpscDockerfile
+docker build . -t opscenter -f OpscDockerfile

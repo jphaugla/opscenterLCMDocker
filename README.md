@@ -10,25 +10,19 @@ If you want to set up a opscenter and datastax without the need for LCM, the doc
 this 
 http://downloads.datastax.com/extra/docker_examples/latest/
 
+This has been changed to no longer use a binary tar file installation to instead use ubuntu apt-get
 
 To run through the demo:
 
-1. Bring down the latest version of opscenter tar file from http://downloads.datastax.com/enterprise.  This command will work changing the file name to the latest version:
-wget --user=$USER --password=$PASS http://downloads.datastax.com/enterprise/opscenter-6.0.0.tar.gz
+1.  put a valid username and password to access the software from the datastax repository into the "datastax.sources.list" file.  This username and password is the same as your login id for academy.datastax.com.  Don't use special characters or it may not work.
 
-the user and password are your login for academy.datastax.com
+2.  run ./dockerOpsCentBuild.sh.  This will build an OpsCenter image
 
-2.  rename this downloaded file to opscenter.tar.gz
+3.  run ./dockerBaseBuild.sh  This will build a base ubuntu image
 
-3.  run ./dockerOpsCentBuild.sh.  This will build an OpsCenter image
+4.  run ./onlyOps.sh  this will run an opscenter image.  
 
-4.  run ./dockerBaseBuild.sh  This will build a base ubuntu image
-
-5.  run ./onlyOps.sh  this will run an opscenter image.  
-
-6.  run "docker start opcenter603"
-
-7.  run ./basenodes.sh
+5.  run ./basenodes.sh
 
 since localhost port 8888 is mapped to the opscenter node, bring up the opscenter interface with http://localhost:8888
 
