@@ -22,7 +22,7 @@ To run through the demo:
 
 4.  run ./onlyOps.sh  this will run an opscenter image.  
 
-	4a.  Can enable ssl between opscenter and opcenter agents.  Directions below:  
+	4a.  Can enable ssl between opscenter and opcenter agents.  It is much easier to turn this on right away than wait for later as this is automatic if turned on before installing the cluster. Directions below:  
 		https://docs.datastax.com/en/latest-opsc/opsc/configure/opscEnableSSLpkg.html
 
 5.  run ./basenodes.sh
@@ -31,6 +31,10 @@ since localhost port 8888 is mapped to the opscenter node, bring up the opscente
 
 Follow these direction to get started.  The scripts have defined a password for root to be used for the "Adding SSH Credentials" section
 
+Alternatively, I have added a script "genkeys.sh" to generate .ssh directory for each of the nodes (hardcoded in script for 3 nodes).  This also copies the public key to "authorized_keys".  With this, copy the /root/.ssh/id_rsa contents and use this as the ssh credentials for the corresponding node
+
 https://docs.datastax.com/en/latest-opsc/opsc/LCM/opscLCMgetStartedWorkflow.html
 Can add SSL using opscenter LCM
 https://docs.datastax.com/en/latest-opsc/opsc/LCM/opscLCMsecurityOverview.html
+
+
