@@ -22,10 +22,15 @@ To run through the demo:
 
 4.  run ./onlyOps.sh  this will run an opscenter image.  
 
-5.  run ./basenodes.sh
+	4a.  Can enable ssl between opscenter and opcenter agents.  Directions below:  
+		https://docs.datastax.com/en/latest-opsc/opsc/configure/opscEnableSSLpkg.html
 
+5.  run ./basenodes.sh
+		
 since localhost port 8888 is mapped to the opscenter node, bring up the opscenter interface with http://localhost:8888
 
 Follow these direction to get started.  The scripts have defined a password for root to be used for the "Adding SSH Credentials" section
 
 https://docs.datastax.com/en/latest-opsc/opsc/LCM/opscLCMgetStartedWorkflow.html
+Can add SSL using opscenter LCM
+https://docs.datastax.com/en/latest-opsc/opsc/LCM/opscLCMsecurityOverview.html
