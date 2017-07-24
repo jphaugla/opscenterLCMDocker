@@ -23,7 +23,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     zlib1g \
     gzip \
     python \
-    python-support \
     sysstat \
     ssh  \
     openssh-server \
@@ -32,7 +31,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     rm -rf /var/lib/apt/lists/*
 
 # grab gosu for easy step-down from root
-RUN curl -o /bin/gosu -SkL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture)" \
+RUN curl -o /bin/gosu -SkL "https://github.com/tianon/gosu/releases/download/1.7/gosu-$(dpkg --print-architecture)" \
     && chmod +x /bin/gosu
 
 COPY sshd_config /etc/ssh/
