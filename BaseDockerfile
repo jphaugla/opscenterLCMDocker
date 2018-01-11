@@ -25,6 +25,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     python \
     sysstat \
     ssh  \
+    sudo  \
     openssh-server \
     openssh-client \
     ntp bash tree && \
